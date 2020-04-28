@@ -6,6 +6,7 @@ where e.officecode=o.officecode
 group by country, city
 order by total_emp desc
 limit 3;
+
 -- 2. For company products, each product has inventory and buy price, msrp. Assume that every product is sold on msrp price. Can you write a query to tell company executives: profit margin on each productlines
 select productline, (sum(prod_revenue)-sum(prod_cost))/sum(prod_revenue) as profit_margin
 from
@@ -13,6 +14,7 @@ from
 from products
 group by productline, productcode)t
 group by productline;
+					   
 -- 3. company wants to award the top 3 sales rep They look at who produces the most sales revenue. 
 	-- A. can you write a query to help find the employees.   
 select salesrepemployeenumber, concat(firstname, ' ', lastname) as full_name, sum(priceeach*quantityordered) as sales 
@@ -27,7 +29,7 @@ limit 3;
 update employees
 set jobtitle='Sales Manager' 
 where employeenumber='0000';
-    -- C. An employee  is leaving the company, write a stored procedure to handle the case. 1). Make the current employee inactive, 2). Replaced with its manager employeenumber in order table.  
+	-- C. An employee  is leaving the company, write a stored procedure to handle the case. 1). Make the current employee inactive, 2). Replaced with its manager employeenumber in order table.  
 DELIMITER 
 create procedure employee_inactive(in emp_id int)
 begin
@@ -39,11 +41,13 @@ begin
 end
 DELIMITER  
 call employee_inactive(0000);
+					   
 -- 4. Employee Salary Change Times  Ask to provide a table to show for each employee in a certain department how many times their Salary changes  
 select department_id, es.employee_id, count(distinct es.employee_id, es.salary)-1 as changes from employee_salary es, employees emp
 where es.employee_id=emp.employee_id
 group by es.employee_id
 order by department_id;
+					   
 -- 5. Top 3 salary Ask to provide a table to show for each department the top 3 salary with employee name  and employee has not left the company. 
 select * from
 (
@@ -53,4 +57,4 @@ where (term_date is null or term_date>curdate())
 and start_date<=curdate()
 )t
 where ranking<=3
-order by department_id
+order by department_id;
