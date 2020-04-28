@@ -42,6 +42,7 @@ select ordernumber, sum(priceeach*quantityordered) as total_value from orderdeta
 group by ordernumber
 having total_value>5000;
 
+
 -- One to many relationship
 -- 1. Report the account representative for each customer.
 select customername, concat(firstname,' ',lastname) as salesRep_name from customers c, employees e
@@ -83,6 +84,7 @@ select customername, count(ordernumber) as total_onHold_orders from customers c,
 where c.customernumber=o.customernumber
 and o.status='On Hold'
 group by c.customernumber;
+
 
 -- Many to many relationship
 -- 1. List products sold by order date.
@@ -127,6 +129,7 @@ where p.productcode=d.productcode
 and o.ordernumber=d.ordernumber
 and o.status='On Hold';
 
+
 -- Regular expressions
 -- 1. Find products containing the name 'Ford'.
 select productname from products
@@ -166,6 +169,7 @@ or lastname like '%[^a-zA-Z]%';
 -- 11. List the vendors whose name ends in Diecast
 select distinct productvendor from products 
 where productvendor like '%Diecast';
+
 
 -- General queries
 -- 1. Who is at the top of the organization (i.e.,  reports to no one).
@@ -382,6 +386,7 @@ and d.productcode not in (select distinct productcode from orderdetails d, order
 select customername from customers c
 where c.customernumber not in (select customernumber from payments where left(paymentdate, 4)='2003');
 
+
 -- Correlated subqueries
 -- 1. Who reports to Mary Patterson?
 select firstname, lastname from employees
@@ -411,6 +416,7 @@ from
 	group by ordernumber, productcode)t2
 where t1.ordernumber=t2.ordernumber
 and product_value>0.5*order_value;
+
 
 -- Spatial data
 	-- The Offices and Customers tables contain the latitude and longitude of each office and customer in officeLocation and customerLocation, respectively, in POINT format. Conventionally, latitude and longitude and reported as a pair of points, with latitude first.
