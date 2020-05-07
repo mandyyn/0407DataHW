@@ -31,4 +31,4 @@ from customers c,
 where c.customernumber=o.customernumber
 	and o.ordernumber=d.ordernumber
     and d.productcode=p.productcode
-group by o.ordernumber, c.customernumber, c.salesrepemployeenumber
+group by o.ordernumber, c.customernumber, c.salesrepemployeenumber;
