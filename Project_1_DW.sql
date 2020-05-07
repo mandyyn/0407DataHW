@@ -1,6 +1,6 @@
 /* The following fact table is designed as a Star Schema. 
 The dimension tables are Customers, Payments, Employees, Offices, Products, Productlines, Orders, Orderdetails.
-In the following fact_sales table, each sales_id record is for per product per order*/
+The following fact_sales table records sales information for each order*/
 
 DROP TABLE IF EXISTS fact_sales;
 
