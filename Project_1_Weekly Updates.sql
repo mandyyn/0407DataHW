@@ -13,5 +13,5 @@ where c.customernumber=o.customernumber
 	and o.ordernumber=d.ordernumber
     and d.productcode=p.productcode
     and o.ordernumber not in (select distinct ordernumber from fact_sales)
-group by o.ordernumber, c.customernumber, c.salesrepemployeenumber
+group by o.ordernumber, c.customernumber, c.salesrepemployeenumber;
     
